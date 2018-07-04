@@ -1,0 +1,152 @@
+Name,ID,Stamina,Atk,Def,Type 1,Type 2,Weight(kg),Height (m),Description
+Bulbasaur,1,90,118,118,GRASS,POISON,6.9,0.7,Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun?s rays the seed grows progressively larger.
+Ivysaur,2,120,151,151,GRASS,POISON,13,1,There is a bud on this Pokemons back. To support its weight Ivysaurs legs and trunk grow thick and strong. If it starts spending more time lying in the sunlight it?s a sign that the bud will bloom into a large flower soon.
+Venasaur,3,160,198,198,GRASS,POISON,100,2,There is a large flower on Venusaur?s back. The flower is said to take on vivid colors if it gets plenty of nutrition and sunlight. The flower?s aroma soothes the emotions of people.
+Charmander,4,78,116,96,FIRE,NONE,8.5,0.6,The flame that burns at the tip of its tail is an indication of its emotions. The flame wavers when Charmander is enjoying itself. If the Pokemon becomes enraged the flame burns fiercely.
+Charmeleon,5,116,158,129,FIRE,NONE,19,1.1,Charmeleon mercilessly destroys its foes using its sharp claws. If it encounters a strong foe it turns aggressive. In this excited state the flame at the tip of its tail flares with a bluish white color.
+Charizard,6,156,223,176,FIRE,FLYING,90.5,1.7,Charizard flies around the sky in search of powerful opponents. It breathes fire of such great heat that it melts anything. However it never turns its fiery breath on any opponent weaker than itself.
+Squirtle,7,88,94,122,WATER,NONE,9,0.5,Squirtle?s shell is not merely used for protection. The shell?s rounded shape and the grooves on its surface help minimize resistance in water enabling this Pokemon to swim at high speeds.
+Wartortle,8,118,126,155,WATER,NONE,22.5,1,Its tail is large and covered with a rich thick fur. The tail becomes increasingly deeper in color as Wartortle ages. The scratches on its shell are evidence of this Pokemon?s toughness as a battler.
+Blastoise,9,158,171,210,WATER,NONE,85.5,1.6,Blastoise has water spouts that protrude from its shell. The water spouts are very accurate. They can shoot bullets of water with enough accuracy to strike empty cans from a distance of over 160 feet.
+Caterpie,10,90,55,62,BUG,NONE,2,0.3,It crawls into foliage where it camouflages itself among leaves that are the same color as its body.
+Metapod,11,100,45,94,BUG,NONE,9.9,0.7,This is its pre-evolved form. At this stage it can only harden so it remains motionless to avoid attack.
+Butterfree,12,120,167,151,BUG,FLYING,32,1.1,It flits from flower to flower collecting honey. It can even identify distant flowers in bloom.
+Weedle,13,80,63,55,BUG,POISON,3.2,0.3,Weedle has an extremely acute sense of smell. It is capable of distinguishing its favorite kinds of leaves from those it dislikes just by sniffing with its big red proboscis (nose).
+Kakuna,14,90,46,86,BUG,POISON,10,0.6,Kakuna remains virtually immobile as it clings to a tree. However on the inside it is extremely busy as it prepares for its coming evolution. This is evident from how hot the shell becomes to the touch.
+Beedrill,15,130,169,150,BUG,POISON,29.5,1,Beedrill is extremely territorial. No one should ever approach its nest?this is for their own safety. If angered they will attack in a furious swarm.
+Pidgey,16,80,85,76,FLYING,NORMAL,1.8,0.3,Pidgey has an extremely sharp sense of direction. It is capable of unerringly returning home to its nest however far it may be removed from its familiar surroundings.
+Pidgeotto,17,126,117,108,FLYING,NORMAL,30,1.1,Pidgeotto claims a large area as its own territory. This Pokemon flies around patrolling its living space. If its territory is violated it shows no mercy in thoroughly punishing the foe with its sharp claws.
+Pidgeot,18,166,166,157,FLYING,NORMAL,39.5,1.5,This Pokemon has a dazzling plumage of beautifully glossy feathers. Many Trainers are captivated by the striking beauty of the feathers on its head compelling them to choose Pidgeot as their Pokemon.
+Rattata,19,60,103,70,NORMAL,NONE,3.5,0.3,This Pokemon is common but hazardous. Its sharp incisors can easily cut right through hard wood.
+Raticate,20,110,161,144,NORMAL,NONE,18.5,0.7,The webs on its hind legs enable it to cross rivers. It searches wide areas for food.
+Spearow,21,80,112,61,FLYING,NORMAL,2,0.3,To protect its territory it flies around ceaselessly making high-pitched cries.
+Fearow,22,130,182,135,FLYING,NORMAL,38,1.2,It uses its long beak to attack. It has a surprisingly long reach so it must be treated with caution.
+Ekans,23,70,110,102,POISON,NONE,6.9,2,It flutters the tip of its tongue to seek out the scent of prey then swallows the prey whole.
+Arbok,24,120,167,158,POISON,NONE,65,3.5,To intimidate foes it spreads its chest wide and makes eerie sounds by expelling air from its mouth.
+Pikachu,25,70,112,101,ELECTRIC,NONE,6,0.4,When it is angered it immediately discharges the energy stored in the pouches in its cheeks.
+Raichu,26,120,193,165,ELECTRIC,NONE,30,0.8,If its electric pouches run empty it raises its tail to gather electricity from the atmosphere.
+Sandshrew,27,100,126,145,GROUND,NONE,12,0.6,It prefers dry sandy places because it uses the sand to protect itself when threatened.
+Sandslash,28,150,182,202,GROUND,NONE,29.5,1,Adept at climbing trees it rolls into a spiny ball then attacks its enemies from above.
+Nidoran,29,110,86,94,POISON,NONE,7,0.4,Small and very docile it protects itself with its small poisonous horn when attacked.
+Nidorina,30,140,117,126,POISON,NONE,20,0.8,When Nidorina are with their friends or family they keep their barbs tucked away to prevent hurting each other. This Pokemon appears to become nervous if separated from the others.
+Nidoqueen,31,180,180,174,GROUND,POISON,60,1.3,Nidoqueen?s body is encased in extremely hard scales. It is adept at sending foes flying with harsh tackles. This Pokemon is at its strongest when it is defending its young.
+Nidoran,32,92,105,76,POISON,NONE,9,0.5,Nidoran? has developed muscles for moving its ears. Thanks to them the ears can be freely moved in any direction. Even the slightest sound does not escape this Pokemon?s notice.
+Nidorino,33,122,137,112,POISON,NONE,19.5,0.9,Nidorino has a horn that is harder than a diamond. If it senses a hostile presence all the barbs on its back bristle up at once and it challenges the foe with all its might.
+Nidoking,34,162,204,157,GROUND,POISON,62,1.4,Nidoking?s thick tail packs enormously destructive power. With one swing it can topple a metal transmission tower. Once this Pokemon goes on a rampage there is no stopping it.
+Clefairy,35,140,107,116,FAIRY,NONE,7.5,0.6,Though rarely seen it becomes easier to spot for some reason on the night of a full moon.
+Clefable,36,190,178,171,FAIRY,NONE,40,1.3,Said to live in quiet remote mountains this type of fairy has a strong aversion to being seen.
+Vulpix,37,76,96,122,FIRE,NONE,9.9,0.6,As its body grows larger its six warm tails become more beautiful with a more luxurious coat of fur.
+Ninetales,38,146,169,204,FIRE,NONE,19.9,1.1,It is said to live a thousand years and each of its tails is loaded with supernatural powers.
+Jigglypuff,39,230,80,44,FAIRY,NORMAL,5.5,0.5,It rolls its cute eyes as it sings a soothing lullaby. Its gentle song puts anyone who hears it to sleep.
+Wigglytuff,40,280,156,93,FAIRY,NORMAL,12,1,The body is soft and rubbery. When angered it will suck in air and inflate itself to an enormous size.
+Zubat,41,80,83,76,FLYING,POISON,7.5,0.8,During the day it gathers with others and hangs from the ceilings of old buildings and caves.
+Golbat,42,150,161,153,FLYING,POISON,55,1.6,When it plunges its fangs into its prey it instantly draws and gulps down more than ten ounces of blood.
+Oddish,43,90,131,116,GRASS,POISON,5.4,0.5,During the day it stays in the cold underground to avoid the sun. It grows by bathing in moonlight.
+Gloom,44,120,153,139,GRASS,POISON,8.6,0.8,The smell from its drool-like syrup and the pollen on its petals is so bad it may make opponents faint.
+Vileplume,45,150,202,170,GRASS,POISON,18.6,1.2,By shaking its big petals it scatters toxic pollen into the air turning the air yellow.
+Paras,46,70,121,99,BUG,GRASS,5.4,0.3,As its body grows large oriental mushrooms named tochukaso start sprouting out of its back.
+Parasect,47,120,165,146,BUG,GRASS,29.5,1,The larger the mushroom on its back grows the stronger the mushroom spores it scatters.
+Venonat,48,120,100,102,BUG,POISON,30,1,The small bugs it eats appear only at night so it sleeps in a hole in a tree until night falls.
+Venomoth,49,140,179,150,BUG,POISON,12.5,1.5,The scales it scatters will paralyze anyone who touches them making that person unable to stand.
+Diglett,50,20,109,88,GROUND,NONE,0.8,0.2,It digs underground and chews on tree roots sticking its head out only when the sun isn't bright.
+Dugtrio,51,70,167,147,GROUND,NONE,33.3,0.7,Extremely powerful they can DIG through even the hardest ground to a depth of over 60 miles.
+Meowth,52,80,92,81,NORMAL,NONE,4.2,0.4,It loves things that sparkle. When it sees a shiny object the gold coin on its head shines too.
+Persian,53,130,150,139,NORMAL,NONE,32,1,Its lithe muscles allow it to walk without making a sound. It attacks in an instant.
+Psyduck,54,100,122,96,WATER,NONE,19.6,0.8,The only time it can use its psychic power is when its sleeping brain cells happen to wake.
+Golduck,55,160,191,163,WATER,NONE,76.6,1.7,It appears by waterways at dusk. It may use telekinetic powers if its forehead glows mysteriously.
+Mankey,56,80,148,87,FIGHT,NONE,28,0.5,It is extremely ill-tempered. Groups of them will attack any handy target for no reason.
+Primeape,57,130,207,144,FIGHT,NONE,32,1,It becomes wildly furious if it even senses someone looking at it. It chases anyone that meets its glare.
+Growlithe,58,110,136,96,FIRE,NONE,19,0.7,It controls a big territory. If it detects an unknown smell it roars loudly to force out the intruder.
+Arcanine,59,180,227,166,FIRE,NONE,155,1.9,ARCANINE is known for its high speed. It is said to be capable of running over 6200 miles in a single day and night. 
+Poliwag,60,80,101,82,WATER,NONE,12.4,0.6,Because it is inept at walking on its newly grown legs it always swims around in water.
+Poliwhirl,61,130,130,130,WATER,NONE,20,1,Though it is skilled at walking it prefers to live underwater where there is less danger.
+Poliwrath,62,180,182,187,FIGHT,WATER,54,1.3,It can use its well-developed arms and legs to run on the surface of the water for a split second.
+Abra,63,50,195,103,PSYCHIC,NONE,19.5,0.9,It hypnotizes itself so that it can teleport away when it senses danger even if it is asleep.
+Kadabra,64,80,232,138,PSYCHIC,NONE,56.5,1.3,When it closes its eyes twice as many alpha particles come out of the surface of its body.
+Alakazam,65,110,271,194,PSYCHIC,NONE,48,1.5,It has an IQ of 5000. It calculates many things in order to gain the edge in every battle.
+Machop,66,140,137,88,FIGHT,NONE,19.5,0.8,It trains by lifting rocks in the mountains. It can even pick up a GRAVELER with ease.
+Machoke,67,160,177,130,FIGHT,NONE,70.5,1.5,It always goes at its full power but this very tough and durable POKeMON never gets tired.
+Machamp,68,180,234,162,FIGHT,NONE,130,1.6,With four arms that react more quickly than it can think it can execute many punches at once.
+Bellsprout,69,100,139,64,GRASS,POISON,4,0.7,Prefers hot and humid places. It ensnares tiny insects with its vines and devours them.
+Weepinbell,70,130,172,95,GRASS,POISON,6.4,1,Even though it is filled with ACID it does not melt because it also oozes a neutralizing fluid.
+Victreebel,71,160,207,138,GRASS,POISON,15.5,1.7,Once ingested into this POKeMON's body even the hardest object will melt into nothing.
+Tenacool,72,80,97,182,POISON,WATER,45.5,0.9,As it floats along on the waves it uses its toxic feelers to stab anything it touches.
+Tentacruel,73,160,166,237,POISON,WATER,55,1.6,When its 80 feelers absorb water it stretches to become like a net to entangle its prey.
+Geodude,74,80,132,163,GROUND,ROCK,20,0.4,It uses its arms to steadily climb steep mountain paths. It swings its fists around if angered.
+Graveler,75,110,164,196,GROUND,ROCK,105,1,A slow walker it rolls to move. It pays no attention to any object that happens to be in its path.
+Golem,76,160,211,229,GROUND,ROCK,300,1.4,Its rock-like body is so durable even high-powered dynamite blasts fail to scratch its rugged hide.
+Ponyta,77,100,170,132,FIRE,NONE,30,1,Capable of jumping incredibly high. Its hooves and sturdy legs absorb the impact of a hard landing.
+Rapidash,78,130,207,167,FIRE,NONE,95,1.7,With incredible acceleration it reaches its top speed of 150 mph after running just ten steps.
+Slowpoke,79,180,109,109,PSYCHIC,WATER,36,1.2,Incredibly slow and dopey. It takes 5 seconds for it to feel pain when under attack.
+Slowbro,80,190,177,194,PSYCHIC,WATER,78.5,1.6,An attached SHELLDER won't let go because of the tasty flavor that oozes out of its tail.
+Magnemite,81,50,165,128,ELECTRIC,STEEL,6,0.3,It is born with the ability to defy gravity. It floats in air on powerful electromagnetic waves.
+Mangneton,82,100,223,182,ELECTRIC,STEEL,60,1,When many MAGNETON gather together the resulting magnetic storm disrupts radio waves.
+Farfetche'd,83,104,124,118,FLYING,NORMAL,15,0.8,It always walks about with a plant stalk clamped in its beak. The stalk is used for building its nest.
+Doduo,84,70,158,88,FLYING,NORMAL,39.2,1.4,It lives on a grassy plain where it can see a long way. If it sees an enemy it runs away at 60 mph.
+Dodrio,85,120,218,145,FLYING,NORMAL,85.2,1.8,Uses its three brains to execute complex plans. While two heads sleep one head stays awake.
+Seel,86,130,85,128,WATER,NONE,90,1.1,The light blue fur that covers it keeps it protected against the cold. It loves iceberg-filled oceans.
+Dewgong,87,180,139,184,ICE,WATER,120,1.7,It sleeps under shallow ocean waters during the day then looks for food at night when it's cold.
+Grimer,88,160,135,90,POISON,NONE,30,0.9,When two of these POKeMON's bodies are combined together new poisons are created.
+Muk,89,210,190,184,POISON,NONE,30,1.2,As it moves a very strong poison leaks from it making the ground there barren for three years.
+Shellder,90,60,116,168,WATER,NONE,4,0.3,Clamping on to an opponent reveals its vulnerable parts so it uses this move only as a last resort.
+Cloyster,91,100,186,323,ICE,WATER,132.5,1.5,Even a missile can't break the spikes it uses to stab opponents. They're even harder than its shell.
+Gastly,92,60,186,70,GHOST,POISON,0.1,1.3,It wraps its opponent in its gas-like body slowly weakening its prey by poisoning it through the skin.
+Haunter,93,90,223,112,GHOST,POISON,0.1,1.6,It hides in the dark planning to take the life of the next living thing that wanders close by.
+Gengar,94,120,261,156,GHOST,POISON,40.5,1.5,Hiding in people's shadows at night it absorbs their heat. The chill it causes makes the victims shake.
+Onix,95,70,85,228,GROUND,ROCK,210,8.8,As it digs through the ground it absorbs many hard objects. This is what makes its body so solid.
+Drowzee,96,120,86,158,PSYCHIC,NONE,32.4,1,Puts enemies to sleep then eats their dreams. Occasionally gets sick from eating bad dreams.
+Hypno,97,170,144,215,PSYCHIC,NONE,75.6,1.6,Avoid eye contact if you come across one. It will try to put you to sleep by using its pendulum.
+Krabby,98,60,181,156,WATER,NONE,6.5,0.4,If it is unable to find food it will absorb nutrients by swallowing a mouthful of sand.
+Kingler,99,110,240,214,WATER,NONE,60,1.3,Its oversized claw is very powerful but when it's not in battle the claw just gets in the way.
+Voltorb,100,80,109,114,ELECTRIC,NONE,10.4,0.5,During the study of this POKeMON it was discovered that its components are not found in nature.
+Electrode,101,120,173,179,ELECTRIC,NONE,66.6,1.2,The more energy it charges up the faster it gets. But this also makes it more likely to explode.
+Exeggcute,102,120,107,140,GRASS,PSYCHIC,2.5,0.4,If even one is separated from the group the energy bond between the six will make them rejoin instantly.
+Exeggutor,103,190,223,158,GRASS,PSYCHIC,120,2,Living in a good environment makes it grow lots of heads. A head that drops off becomes an EXEGGCUTE.
+Cubone,104,100,90,165,GROUND,NONE,6.5,0.4,It lost its mother after its birth. It wears its mother's skull never revealing its true face.
+Marowak,105,120,144,200,GROUND,NONE,45,1,MAROWAK is the evolved form of a CUBONE that has overcome its sadness at the loss of its mother and grown tough. This POKeMON?s tempered and hardened spirit is not easily broken.
+Hitmonlee,106,100,224,211,FIGHT,NONE,49.8,1.5,When in a hurry its legs lengthen progressively. It runs smoothly with extra long loping strides.
+Hitmonchan,107,100,193,212,FIGHT,NONE,50.2,1.4,While apparently doing nothing it fires punches in lightning fast volleys that are impossible to see.
+Lickitung,108,180,108,137,NORMAL,NONE,65.5,1.2,Its tongue spans almost 7 feet and moves more freely than its forelegs. Its licks can cause paralysis.
+Koffing,109,80,119,164,POISON,NONE,1,0.6,The poisonous gases it contains are a little bit lighter than air keeping it slightly airborne.
+Weezing,110,130,174,221,POISON,NONE,9.5,1.2,Where two kinds of poison gases meet 2 KOFFINGs can fuse into a WEEZING over many years.
+Rhyhorn,111,160,140,157,GROUND,ROCK,115,1,It can remember only one thing at a time. Once it starts rushing it forgets why it started.
+Rhydon,112,210,222,206,GROUND,ROCK,120,1.9,Protected by an armor-like hide it is capable of living in molten lava of 3600 degrees.
+Chansey,113,500,60,176,NORMAL,NONE,34.6,1.1,People try to catch it for its extremely nutritious eggs but it rarely can be found.
+Tangela,114,130,183,205,GRASS,NONE,35,1,During battle it constantly moves the vines that cover its body in order to annoy its opponent.
+Kangaskhan,115,210,181,165,NORMAL,NONE,80,2.2,To avoid crushing the baby it carries in its pouch it always sleeps standing up.
+Horsea,116,60,129,125,WATER,NONE,8,0.4,If it senses any danger it will vigorously spray water or a special type of ink from its mouth.
+Seadra,117,110,187,182,WATER,NONE,25,1.2,The male raises the young. If it is approached it uses its toxic spikes to fend off the intruder.
+Goldeen,118,90,123,115,WATER,NONE,15,0.6,A strong swimmer it is capable of swimming nonstop up fast streams at a steady speed of five knots.
+Seaking,119,160,175,154,WATER,NONE,39,1.3,When autumn comes the males patrol the area around their nests in order to protect their offspring.
+Staryu,120,60,137,112,WATER,NONE,80,1.1,Even if its body is torn it can regenerate as long as the glowing central core remains intact.
+Starmie,121,120,210,184,PSYCHIC,WATER,80,1.1,It is said that it uses the seven-colored core of its body to send electric waves into outer space.
+Mr. Mime,122,80,192,233,FAIRY,PSYCHIC,54.5,1.3,It uses the mysterious power it has in its fingers to solidify air into an invisible wall.
+Scyther,123,140,218,170,BUG,FLYING,56,1.5,It slashes through grass with its sharp scythes moving too fast for the human eye to track.
+Jynx,124,130,223,182,ICE,PSYCHIC,40.6,1.4,It speaks a language similar to that of humans. However it seems to use dancing to communicate.
+Electrabuzz,125,130,198,173,ELECTRIC,NONE,30,1.1,Electricity runs across the surface of its body. In darkness its entire body glows a whitish-blue.
+Magmar,126,130,206,169,FIRE,NONE,44.5,1.3,It moves more frequently in hot areas. It can heal itself by dipping its wound into lava.
+Pinsir,127,130,238,197,BUG,NONE,55,1.5,When the temperature drops at night it sleeps on treetops or among roots where it is well hidden
+Tauros,128,150,198,197,NORMAL,NONE,88.4,1.4,These violent POKeMON fight with other members of their herd in order to prove their strength.
+Magikarp,129,40,29,102,WATER,NONE,10,0.9,Magikarp is virtually useless in battle as it can only splash around. As a result it is considered to be weak. However it is actually a very hardy Pokemon that can survive in any body of water no matter how polluted it is.
+Gyarados,130,190,237,197,FLYING,WATER,235,6.5,When Magikarp evolves into Gyarados its brain cells undergo a structural transformation. It is said that this transformation is to blame for this Pokemon?s wildly violent nature.
+Lapras,131,260,165,180,ICE,WATER,220,2.5,A POKeMON that has been overhunted almost to extinction. It can ferry people across the water.
+Ditto,132,96,91,91,NORMAL,NONE,4,0.3,It can transform into anything. When it sleeps it changes into a stone to avoid being attacked.
+Eevee,133,110,104,121,NORMAL,NONE,6.5,0.3,Its genetic code is unstable so it could evolve in a variety of ways. There are only a few alive.
+Vaporeon,134,260,205,177,WATER,NONE,29,1,As it uses the fins on the tip of its tail to swim it blends with the water perfectly.
+Jolteon,135,130,232,201,ELECTRIC,NONE,24.5,0.8,The negatively charged ions generated in its fur create a constant sparking noise.
+Flareon,136,130,246,204,FIRE,NONE,25,0.9,It has a flame chamber inside its body. It inhales then blows out fire that is over 3000F degrees.
+Porygon,137,130,153,139,NORMAL,NONE,36.5,0.8,A manmade POKeMON that came about as a result of research. It is programmed with only basic motions.
+Omanyte,138,70,155,174,ROCK,WATER,7.5,0.4,In prehistoric times it swam on the sea floor eating plankton. Its fossils are sometimes found.
+Omastar,139,140,207,227,ROCK,WATER,35,1,A prehistoric POKeMON that died out when its heavy shell made it impossible to catch prey.
+Kabuto,140,60,148,162,ROCK,WATER,11.5,0.5,Three hundred million years ago it hid on the sea floor. It also has eyes on its back that glow.
+Kabutops,141,120,220,203,ROCK,WATER,40.5,1.3,Its body had begun to change so it could function on land. But it didn?t adapt in time and went extinct.
+Aerodactyl,142,160,221,164,FLYING,ROCK,59,1.8,A savage POKeMON that died out in ancient times. It was resurrected using DNA taken from amber.
+Snorlax,143,320,190,190,NORMAL,NONE,460,2.1,Very lazy. Just eats and sleeps. As its rotund bulk builds it becomes steadily more slothful.
+Articuno,144,180,192,249,FLYING,ICE,55.4,1.7,A legendary bird POKeMON that is said to appear to doomed people who are lost in icy mountains.
+Zapdos,145,180,253,188,ELECTRIC,FLYING,52.6,1.6,A legendary bird POKeMON that is said to appear from clouds while dropping enormous lightning bolts.
+Moltres,146,180,251,184,FIRE,FLYING,60,2,A legendary bird POKeMON. As it flaps its flaming wings even the night sky will turn red.
+Dratini,147,82,119,94,DRAGON,NONE,3.3,1.8,This POKeMON is full of life energy. It continually sheds its skin and grows steadily larger.
+Dragonair,148,122,163,138,DRAGON,NONE,16.5,4,A mystical POKeMON that exudes a gentle aura. Has the ability to change climate conditions.
+Dragonite,149,182,263,201,DRAGON,FLYING,210,2.2,An extremely rarely seen marine POKeMON. Its intelligence is said to match that of humans.
+Mewtwo,150,193,300,182,PSYCHIC,NONE,122,2,It usually remains motionless to conserve energy so that it may unleash its full power in battle.
+Mew,151,200,210,210,PSYCHIC,NONE,4,0.4,Because it can learn any move some people began research to see if it is the ancestor of all POKeMON.
