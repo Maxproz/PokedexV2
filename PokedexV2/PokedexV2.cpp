@@ -28,6 +28,8 @@
 
 
 
+
+
 enum class PokemonType
 {
 	BUG = 0,
@@ -141,15 +143,93 @@ public:
 
 	std::string m_Description{ "" };
 
+	// These two go hand in hand to display an image on the screen
+	// NOTE: owning pointers (probably change to unique or shared ptrs later
+	sf::Texture* m_PictureTexture{ nullptr };
+	//sf::Sprite* m_PictureSprite{ nullptr };
+
 	PokedexEntry() = default;
 
 	PokedexEntry(std::string Name, unsigned int ID, unsigned int Stam, unsigned int Atk, unsigned int Def,
-					PokemonType TyOne, PokemonType TyTwo, double Weight, double Height, std::string Desc) :
+					PokemonType TyOne, PokemonType TyTwo, double Weight, double Height, std::string Desc, std::string PictureFileName) :
 		m_Name{ Name }, m_ID{ ID }, m_Stamina{ Stam }, m_Attack{ Atk }, m_Defense{ Def },
 		m_FirstType{ TyOne }, m_SecondType{ TyTwo }, m_Weight{ Weight }, m_Height{ Height }, m_Description{ Desc }
 	{
 
+		// TODO: Probably shouldnt have this load inside a constructor?
+		// Load a sprite to display
+		m_PictureTexture = new sf::Texture();
+
+		if (!m_PictureTexture->loadFromFile(PictureFileName))
+			throw std::exception("Error loading picture for pokemon");
+
+		//m_PictureSprite = new sf::Sprite(*m_PictureTexture);
+		//m_PictureSprite->setTexture(*m_PictureTexture);
 	}
+
+	~PokedexEntry()
+	{
+		//if (m_PictureSprite)
+		//{
+		//	delete m_PictureSprite;
+		//}
+		
+		if (m_PictureTexture)
+		{
+			delete m_PictureTexture;
+		}
+	}
+
+	PokedexEntry(const PokedexEntry& copy)
+	{
+		m_Name = copy.m_Name;
+		m_ID = copy.m_ID;
+		m_Stamina = copy.m_Stamina;
+		m_Attack = copy.m_Attack;
+		m_Defense = copy.m_Defense;
+
+		m_FirstType = copy.m_FirstType;
+		m_SecondType = copy.m_SecondType;
+
+		m_Weight = copy.m_Weight; // inputed in Kilograms
+		m_Height = copy.m_Height; // inputed in Meters
+
+		m_Description = copy.m_Description;
+
+		if (copy.m_PictureTexture)
+		{
+			m_PictureTexture = new sf::Texture(*copy.m_PictureTexture);
+		}
+		else
+		{
+			m_PictureTexture = nullptr;
+		}
+
+		// NOTE: for some reason when I tried to track the sprite pointer here to,
+		// something went wrong and I was losing the handle to it somehow.
+
+		//if (copy.m_PictureSprite)
+		//{
+		//	m_PictureSprite = new sf::Sprite(*copy.m_PictureSprite);
+		//	m_PictureSprite->setTexture(*copy.m_PictureTexture);
+		//}
+		//else
+		//{
+		//	m_PictureSprite = nullptr;
+		//}
+		
+		
+	}
+
+	PokedexEntry& operator=(const PokedexEntry& copyassign)
+	{
+		PokedexEntry Temp(copyassign);
+		*this = Temp;
+		return *this;
+	}
+
+	//PokedexEntry(PokedexEntry&& move) = delete;
+
 
 };
 
@@ -177,6 +257,26 @@ void InitializePokedex(const CSVDatabase& PKMNDataBase)
 		CurrentEntry.m_Weight = std::stod(PKMNDataBase[Rows][7]);
 		CurrentEntry.m_Height = std::stod(PKMNDataBase[Rows][8]);
 		CurrentEntry.m_Description = PKMNDataBase[Rows][9];
+
+
+		std::string PictureFileName = PKMNDataBase[Rows][10];
+		
+		if (PictureFileName != "NONE")
+		{
+			// Load a sprite to display
+			CurrentEntry.m_PictureTexture = new sf::Texture();
+
+			if (!CurrentEntry.m_PictureTexture->loadFromFile(PictureFileName))
+				throw std::exception("Error loading picture for pokemon");
+
+			//CurrentEntry.m_PictureSprite = new sf::Sprite(*CurrentEntry.m_PictureTexture);
+			//CurrentEntry.m_PictureSprite->setTexture(*CurrentEntry.m_PictureTexture);
+		}
+		else
+		{
+			CurrentEntry.m_PictureTexture = nullptr;
+			//CurrentEntry.m_PictureSprite = nullptr;
+		}
 
 		m_PokedexData.push_back(CurrentEntry);
 	}
@@ -207,6 +307,8 @@ void DisplayPokedexEntry(const unsigned int PokemonID)
 	std::cout << "Height (m): " << m_PokedexData[PokemonID].m_Height << std::endl;
 
 	std::cout << "Description: " << m_PokedexData[PokemonID].m_Description << std::endl << std::endl;
+
+	// NOTE: Pokemon picture stuff not added here, but it works in the SFML UI
 }
 
 
@@ -287,67 +389,67 @@ std::string GetGameStateAsString(const GAMESTATE& InGameState)
 #define MAX_NUMBER_OF_POKEDEX_ITEMS 10
 
 
-//class Menu
-//{
-//protected:
-//	Menu() = default;
-//	Menu(float width, float height);
-//	int& ModifySelectedItemIndex() { return selectedItemIndex; }
-//
-//public:
-//	virtual ~Menu() {}
-//	virtual void drawTo(sf::RenderWindow& window) = 0;
-//	virtual void MoveNext() = 0;
-//	virtual void MovePrevious() = 0;
-//
-//	int GetPressedItem() { return selectedItemIndex; }
-//	//sf::Font GetFont() const { return font; }
-//
-//
-//
-//	// These two will only be overidden in Pokedex Menu class
-//	virtual void GoNextPokemon()  {};
-//	virtual void GoPreviousPokemon() {};
-//
-//
-//	virtual void UpdateMenu() {};
-//
-//	
-//private:
-//	int selectedItemIndex{ 0 };
-//	
-//};
-//
-//
-//
-//Menu::Menu(float width, float height)
-//{
-//	sf::Font font;
-//	if (!font.loadFromFile("arial.ttf"))
-//	{
-//		// TODO: handle error
-//	}
-//
-//	selectedItemIndex = 0;
-//}
+class Menu
+{
+protected:
+	Menu() = default;
+	Menu(float width, float height);
+	int& ModifySelectedItemIndex() { return selectedItemIndex; }
+
+public:
+	virtual ~Menu() {}
+	virtual void drawTo(sf::RenderWindow& window) = 0;
+	virtual void MoveNext() = 0;
+	virtual void MovePrevious() = 0;
+
+	int GetPressedItem() { return selectedItemIndex; }
+	//sf::Font GetFont() const { return font; }
 
 
 
-class MainMenu //: public Menu
+	// These two will only be overidden in Pokedex Menu class
+	virtual void GoNextPokemon()  {};
+	virtual void GoPreviousPokemon() {};
+
+
+	virtual void UpdateMenu() {};
+
+	
+private:
+	int selectedItemIndex{ 0 };
+	
+};
+
+
+
+Menu::Menu(float width, float height)
+{
+	//sf::Font font;
+	//if (!font.loadFromFile("arial.ttf"))
+	//{
+	//	// TODO: handle error
+	//}
+
+	selectedItemIndex = 0;
+}
+
+
+
+class MainMenu : public Menu
 {
 public:
 	MainMenu(float width, float height, sf::Font font);
 	~MainMenu() {}
 
-	/*virtual */void drawTo(sf::RenderWindow& window);// override;
-	/*virtual */void MoveNext();// override;
-	/*virtual */void MovePrevious();// override;
+	virtual void drawTo(sf::RenderWindow& window) override;
+	virtual void MoveNext() override;
+	virtual void MovePrevious() override;
 
 
-	int GetPressedItem() { return selectedItemIndex; }
+	//int GetPressedItem() { return selectedItemIndex; }
 
 protected:
-	int& ModifySelectedItemIndex() { return selectedItemIndex; }
+	//int& ModifySelectedItemIndex() { return selectedItemIndex; }
 
 private:
 	sf::Text menu[MAX_NUMBER_OF_MAINMENU_ITEMS];
@@ -355,7 +457,7 @@ private:
 	int selectedItemIndex{ 0 };
 };
 
-MainMenu::MainMenu(float width, float height, sf::Font font) //: Menu(width, height)
+MainMenu::MainMenu(float width, float height, sf::Font font) : Menu(width, height)
 {
 	m_Font = font;
 
@@ -411,16 +513,16 @@ void MainMenu::MoveNext()
 	}
 }
 
-// A PokedexMenu hmmm, how should I oragnize this?
-class PokedexMenu // : public Menu
+// A PokedexMenu hmmm, how should I organize this?
+class PokedexMenu final : public Menu
 {
 public:
 	PokedexMenu(float width, float height, sf::Font font);
 	~PokedexMenu() {}
 
-	/*virtual*/ void drawTo(sf::RenderWindow& window);// override;
-	/*virtual*/ void MoveNext();// override;
-	/*virtual*/ void MovePrevious();// override;
+	virtual void drawTo(sf::RenderWindow& window) override;
+	virtual void MoveNext() override;
+	virtual void MovePrevious() override;
 
 
 	// TODO: Make this more generic later
@@ -429,22 +531,22 @@ public:
 	// TODO: Encapsulate this variable later
 	int CurrentPokemonID{ 1 };
 
-	int GetPressedItem() { return selectedItemIndex; }
+	//int GetPressedItem() { return selectedItemIndex; }
 
 
-	void GoNextPokemon() // override
+	virtual void GoNextPokemon() override final
 	{
 		CurrentPokemonID++;
 		UpdateMenu();
 	}
 
-	void GoPreviousPokemon() // override
+	virtual void GoPreviousPokemon() override final
 	{
 		CurrentPokemonID--;
 		UpdateMenu();
 	}
 
-	void UpdateMenu() // override
+	virtual void UpdateMenu() override final
 	{
 		CurrentEntry = &(m_PokedexData[CurrentPokemonID]);
 
@@ -472,27 +574,40 @@ public:
 		menu[2].setString("Press A and D to move to different pokemon");
 		menu[2].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 3));
 
+		if (CurrentEntry->m_PictureTexture != nullptr)
+		{
+			m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
+			m_PokemonPicture->setPosition(sf::Vector2f(m_Width / 2, 0));
+		}
+		else
+		{
+			m_PokemonPicture = nullptr;
+		}
+
+		
+		//m_PokemonPicture->setColor(sf::Color::Transparent);
 	}
 
 	//sf::Font GetFont() const { return m_font; }
 
 protected:
-	int& ModifySelectedItemIndex() { return selectedItemIndex; }
+	//int& ModifySelectedItemIndex() { return selectedItemIndex; }
 
 private:
 
-	int selectedItemIndex{ 0 };
+	//int selectedItemIndex{ 0 };
 
-	//sf::Text menu[MAX_NUMBER_OF_POKEDEX_ITEMS];
+	//sf::Text menu[MAX_NUMBER_OF_POKEDEX_ITEMS]; // not using this until I know how many i actually need (using 3 as a temp variable for testing below)
 	int m_Width{ 0 };
 	int m_Height{ 0 };
 
 	sf::Text menu[3];
 	sf::Font m_Font;
 	
+	sf::Sprite* m_PokemonPicture{ nullptr };
 };
 
-PokedexMenu::PokedexMenu(float width, float height, sf::Font font) // : Menu(width, height)
+PokedexMenu::PokedexMenu(float width, float height, sf::Font font) : Menu(width, height)
 {
 	m_Font = font;
 
@@ -521,6 +636,18 @@ PokedexMenu::PokedexMenu(float width, float height, sf::Font font) // : Menu(wid
 	menu[2].setString("Press A and D to move to different pokemon");
 	menu[2].setPosition(sf::Vector2f(0, height / (3 + 1) * 3));
 
+
+	if (CurrentEntry->m_PictureTexture != nullptr)
+	{
+		m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
+		m_PokemonPicture->setPosition(sf::Vector2f(m_Width / 2, 0));
+	}
+	else
+	{
+		m_PokemonPicture = nullptr;
+	}
+
+
 }
 
 
@@ -534,6 +661,11 @@ void PokedexMenu::drawTo(sf::RenderWindow& window)
 	for (int i = 0; i < 3; i++)
 	{
 		window.draw(menu[i]);
+	}
+	
+	if (m_PokemonPicture != nullptr)
+	{
+		window.draw(*m_PokemonPicture);
 	}
 }
 
@@ -594,8 +726,6 @@ int main(int argc, char* argv[])
 	}
 
 	readCSV(File, FirstGenerationDB);
-
-
 	InitializePokedex(FirstGenerationDB);
 
 
@@ -625,53 +755,17 @@ int main(int argc, char* argv[])
 	unsigned int width = size.x;
 	unsigned int height = size.y;
 
-	MainMenu* CurrentMainMenu = new MainMenu(width, height, DebugFont);// = new MainMenu(width, height);
-	PokedexMenu* CurrentPokedexMenu = new PokedexMenu(width, height, DebugFont);// { nullptr };
-
-	
-
-	// WORKED!
-	//DisplayPokedexEntry(65); // This test should display an accurate data entry for Alakazam
 
 
 
+	Menu* CurrentMenu = new MainMenu(width, height, DebugFont);
 
-	//// change the position of the window (relatively to the desktop)
-	//window.setPosition(sf::Vector2i(10, 50));
 
-	//// change the size of the window
-	//window.setSize(sf::Vector2u(640, 480));
-
-	// change the title of the window
-	//window.setTitle("SFML window");
-
-	//bool PlayButtonPressed = false;
 
 
 	while (window.isOpen())
 	{
 		sf::Event Event;
-
-
-		//if (CurrentGameState == GAMESTATE::POKEDEXMENU)
-		//{
-		//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		//	{
-
-		//		// if (OnPokedexEntryWindow())
-		//		//		GoToNextEntry();
-		//	}
-		//	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		//	{
-
-		//		// if (OnPokedexEntryWindow())
-		//		//		GoToPreviousEntry();
-		//	}
-		//}
-		//else
-		//{
-
-		//}
 
 
 		//Event Loop:
@@ -688,42 +782,52 @@ int main(int argc, char* argv[])
 						{
 							if (CurrentGameState == GAMESTATE::MAINMENU)
 							{
-								CurrentMainMenu->MoveNext();
+								//CurrentMainMenu->MoveNext();
+								CurrentMenu->MoveNext();
 								break;
 							}
-							//else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
-							//{
-
-							//}
+							else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
+							{
+								CurrentMenu->GoNextPokemon();
+								break;
+							}
 
 						}
 						case sf::Keyboard::Left:
 						{
 							if (CurrentGameState == GAMESTATE::MAINMENU)
 							{
-								CurrentMainMenu->MovePrevious();
+								//CurrentMainMenu->MovePrevious();
+								CurrentMenu->MovePrevious();
 								break;
 							}
-							//else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
-							//{
-
-							//}
+							else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
+							{
+								CurrentMenu->GoPreviousPokemon();
+								break;
+							}
 						}
 						case sf::Keyboard::Return:
 						{
 							if (CurrentGameState == GAMESTATE::MAINMENU)
 							{
-								switch (CurrentMainMenu->GetPressedItem())
+								//switch (CurrentMainMenu->GetPressedItem())
+								switch (CurrentMenu->GetPressedItem())
 								{
 									case 0:
 									{
 										std::cout << "Play button has been pressed" << std::endl;
-										//PlayButtonPressed = true;
+										
+										delete CurrentMenu;
+										CurrentMenu = new PokedexMenu(width, height, DebugFont);
 										//CurrentPokedexMenu = new PokedexMenu(width, height, DebugFont);
 										CurrentGameState = GAMESTATE::POKEDEXMENU;
+										
 										GameStateDebugText.setString("Current GameState: " + GetGameStateAsString(CurrentGameState));
+
 										//delete CurrentMainMenu;
 										//CurrentMainMenu = nullptr;
+
 										break;
 									}
 									case 1:
@@ -741,16 +845,21 @@ int main(int argc, char* argv[])
 
 								break; // break out of this inner switch 
 							}
-							//else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
-							//{
-
-							//}
+							else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
+							{
+								break;
+							}
 						}
 						case sf::Keyboard::D:
 						{
 							if (CurrentGameState == GAMESTATE::POKEDEXMENU)
 							{
-								CurrentPokedexMenu->GoNextPokemon();
+								// CurrentPokedexMenu->GoNextPokemon();
+								CurrentMenu->GoNextPokemon();
+								break;
+							}
+							else if (CurrentGameState == GAMESTATE::MAINMENU)
+							{
 								break;
 							}
 						}
@@ -758,7 +867,12 @@ int main(int argc, char* argv[])
 						{
 							if (CurrentGameState == GAMESTATE::POKEDEXMENU)
 							{
-								CurrentPokedexMenu->GoPreviousPokemon();
+								// CurrentPokedexMenu->GoPreviousPokemon();
+								CurrentMenu->GoPreviousPokemon();
+								break;
+							}
+							else if (CurrentGameState == GAMESTATE::MAINMENU)
+							{
 								break;
 							}
 						}
@@ -772,12 +886,9 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
-		
 
-		//if (PlayButtonPressed)
-		//	CurrentGameState = GAMESTATE::POKEDEXMENU;
 
-		window.clear();
+		window.clear(sf::Color::Cyan);
 
 		// SFML example game code
 		//coin1.drawTo(window);
@@ -800,28 +911,15 @@ int main(int argc, char* argv[])
 		display window﻿
 		*/
 
-		if (CurrentGameState == GAMESTATE::MAINMENU)
-		{
-			if (CurrentMainMenu)
-			{
-				CurrentMainMenu->drawTo(window);
-			}
-		}
-		else if (CurrentGameState == GAMESTATE::POKEDEXMENU)
-		{
-			if (CurrentPokedexMenu)
-			{
-				CurrentPokedexMenu->drawTo(window);
-			}
-		}
-		else
-		{
 
-		}
+		window.draw(GameStateDebugText);
 
+		if (CurrentMenu != nullptr)
+		{
+			CurrentMenu->drawTo(window);
+		}
 		
-		// Its fine if I draw debug texts seperate from the window for now.
-		//window.draw(GameStateDebugText);
+
 
 		window.display();
 	}
