@@ -58,7 +58,7 @@ std::string GetPokemonTypeName(const PokemonType& InType)
 {
 	switch (InType)
 	{
-		case PokemonType::BUG: { return std::string{ "Bug" }; }
+		case PokemonType::BUG: { return std::string{ "BUG" }; }
 		case PokemonType::ELECTRIC: { return std::string {"ELECTRIC"}; }
 		case PokemonType::FIRE: { return std::string{ "FIRE" }; }
 		case PokemonType::GRASS: { return std::string{ "GRASS" }; }
@@ -174,10 +174,11 @@ public:
 		//	delete m_PictureSprite;
 		//}
 		
-		if (m_PictureTexture)
-		{
-			delete m_PictureTexture;
-		}
+		// TODO: I need to make this a shared_ptr.
+		//if (m_PictureTexture)
+		//{
+		//	delete m_PictureTexture;
+		//}
 	}
 
 	PokedexEntry(const PokedexEntry& copy)
@@ -386,7 +387,7 @@ std::string GetGameStateAsString(const GAMESTATE& InGameState)
 
 
 #define MAX_NUMBER_OF_MAINMENU_ITEMS 3
-#define MAX_NUMBER_OF_POKEDEX_ITEMS 10
+
 
 
 class Menu
@@ -513,6 +514,9 @@ void MainMenu::MoveNext()
 	}
 }
 
+
+#define MAX_NUMBER_OF_POKEDEX_ITEMS 14
+
 // A PokedexMenu hmmm, how should I organize this?
 class PokedexMenu final : public Menu
 {
@@ -558,26 +562,161 @@ public:
 		////menu[1].setFillColor(sf::Color::White);
 
 
+		//sf::Text PokemonNameSFText(CurrentEntry->m_Name, m_Font);
+		//menu[0] = PokemonNameSFText;
+		//menu[0].setFillColor(sf::Color::Red);
+		//menu[0].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 1));
+
+		//sf::Text PokemonDescriptionSFText(CurrentEntry->m_Description, m_Font);
+		//menu[1] = PokemonDescriptionSFText;
+		//menu[1].setFillColor(sf::Color::White);
+		//menu[1].setCharacterSize(12);
+		//menu[1].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 2));
+
+		//menu[2].setFont(m_Font);
+		//menu[2].setFillColor(sf::Color::White);
+		//menu[2].setString("Press A and D to move to different pokemon");
+		//menu[2].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 3));
+
+		//if (CurrentEntry->m_PictureTexture != nullptr)
+		//{
+		//	m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
+		//	m_PokemonPicture->setPosition(sf::Vector2f(m_Width / 2, 0));
+		//}
+		//else
+		//{
+		//	m_PokemonPicture = nullptr;
+		//}
+
 		sf::Text PokemonNameSFText(CurrentEntry->m_Name, m_Font);
 		menu[0] = PokemonNameSFText;
 		menu[0].setFillColor(sf::Color::Red);
-		menu[0].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 1));
+		menu[0].setPosition(sf::Vector2f(0, 50.f));
 
 		sf::Text PokemonDescriptionSFText(CurrentEntry->m_Description, m_Font);
 		menu[1] = PokemonDescriptionSFText;
 		menu[1].setFillColor(sf::Color::White);
 		menu[1].setCharacterSize(12);
-		menu[1].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 2));
+		menu[1].setPosition(sf::Vector2f(0, m_Height - 50.f));
 
 		menu[2].setFont(m_Font);
 		menu[2].setFillColor(sf::Color::White);
 		menu[2].setString("Press A and D to move to different pokemon");
-		menu[2].setPosition(sf::Vector2f(0, m_Height / (3 + 1) * 3));
+		menu[2].setPosition(sf::Vector2f(0, m_Height - 100.f));
+
+		menu[3].setString("ID: ");
+		menu[3].setCharacterSize(30); // default
+		menu[3].setFont(m_Font);
+		menu[3].setFillColor(sf::Color::White);
+		menu[3].setPosition(sf::Vector2f(m_Width - 100, 50.f));
+
+		
+		sf::Text PokemonIDText(std::to_string(CurrentEntry->m_ID), m_Font);
+		menu[4] = PokemonIDText;
+		menu[4].setFillColor(sf::Color::White);
+		menu[4].setCharacterSize(30);
+		menu[4].setPosition(sf::Vector2f(menu[3].getPosition().x + 50.f, menu[3].getPosition().y));
+
+
+		const int LabelPaddingX = 75;
+		const int LabelPaddingY = 0;
+
+		const int VariablePaddingX = 10;
+		const int VariablePaddingY = 30;
+
+		const unsigned int LabelCharacterSize = 20;
+		const unsigned int VariableCharacterSize = 15;
+
+		menu[5].setString("HP");
+		menu[5].setCharacterSize(LabelCharacterSize); // default
+		menu[5].setFont(m_Font);
+		menu[5].setFillColor(sf::Color::White);
+		menu[5].setPosition(sf::Vector2f(0.f, 300.f));
+
+		sf::Text PokemonHPText(std::to_string(CurrentEntry->m_Stamina), m_Font);
+		menu[6] = PokemonHPText;
+		menu[6].setFillColor(sf::Color::White);
+		menu[6].setCharacterSize(VariableCharacterSize);
+		menu[6].setPosition(sf::Vector2f(menu[5].getPosition().x + VariablePaddingX, menu[5].getPosition().y + VariablePaddingY));
+
+
+		menu[7].setString("Attack");
+		menu[7].setCharacterSize(LabelCharacterSize); // default
+		menu[7].setFont(m_Font);
+		menu[7].setFillColor(sf::Color::White);
+		menu[7].setPosition(sf::Vector2f(menu[5].getPosition().x + LabelPaddingX, menu[5].getPosition().y));
+
+
+		sf::Text PokemonAttackText(std::to_string(CurrentEntry->m_Attack), m_Font);
+		menu[8] = PokemonAttackText;
+		menu[8].setFillColor(sf::Color::White);
+		menu[8].setCharacterSize(VariableCharacterSize);
+		menu[8].setPosition(sf::Vector2f(menu[7].getPosition().x + VariablePaddingX, menu[7].getPosition().y + VariablePaddingY));
+
+
+		menu[9].setString("Defense");
+		menu[9].setCharacterSize(LabelCharacterSize); // default
+		menu[9].setFont(m_Font);
+		menu[9].setFillColor(sf::Color::White);
+		menu[9].setPosition(sf::Vector2f(menu[7].getPosition().x + LabelPaddingX, menu[7].getPosition().y));
+
+
+		sf::Text PokemonDefenseText(std::to_string(CurrentEntry->m_Defense), m_Font);
+		menu[10] = PokemonDefenseText;
+		menu[10].setFillColor(sf::Color::White);
+		menu[10].setCharacterSize(VariableCharacterSize);
+		menu[10].setPosition(sf::Vector2f(menu[9].getPosition().x + VariablePaddingX, menu[9].getPosition().y + VariablePaddingY));
+
+
+
+
+
+		// Print Types
+		const int PokemonTypeTextPadding = 75;
+
+		menu[11].setString("Type: ");
+		menu[11].setCharacterSize(20); // default
+		menu[11].setFont(m_Font);
+		menu[11].setFillColor(sf::Color::White);
+		menu[11].setPosition(sf::Vector2f(m_Width / 2, m_Height / 2));
+
+
+		sf::Text PokemonFirstTypeText(GetPokemonTypeName(CurrentEntry->m_FirstType), m_Font);
+		menu[12] = PokemonFirstTypeText;
+		menu[12].setFillColor(sf::Color::White);
+		menu[12].setCharacterSize(20);
+		menu[12].setPosition(sf::Vector2f(menu[11].getPosition().x + PokemonTypeTextPadding, menu[11].getPosition().y));
+
+		sf::Text PokemonSecondTypeText(GetPokemonTypeName(CurrentEntry->m_SecondType), m_Font);
+		menu[13] = PokemonSecondTypeText;
+		menu[13].setFillColor(sf::Color::White);
+		menu[13].setCharacterSize(20);
+		menu[13].setPosition(sf::Vector2f(menu[12].getPosition().x + PokemonTypeTextPadding, menu[12].getPosition().y));
+
+		if (CurrentEntry->m_SecondType == PokemonType::NONE)
+		{
+			menu[13].setString("");
+		}
+
+
+
 
 		if (CurrentEntry->m_PictureTexture != nullptr)
 		{
-			m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
-			m_PokemonPicture->setPosition(sf::Vector2f(m_Width / 2, 0));
+			if (m_PokemonPicture)
+			{
+				delete m_PokemonPicture;
+				m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
+				m_PokemonPicture->setPosition(sf::Vector2f((m_Width / 2) - 200.f, 0));
+			}
+			else
+			{
+				m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
+				m_PokemonPicture->setPosition(sf::Vector2f((m_Width / 2) - 200.f, 0));
+			}
+
+			//m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
+			//m_PokemonPicture->setPosition(sf::Vector2f((m_Width / 2) - 100.f, 0));
 		}
 		else
 		{
@@ -601,7 +740,7 @@ private:
 	int m_Width{ 0 };
 	int m_Height{ 0 };
 
-	sf::Text menu[3];
+	sf::Text menu[MAX_NUMBER_OF_POKEDEX_ITEMS];
 	sf::Font m_Font;
 	
 	sf::Sprite* m_PokemonPicture{ nullptr };
@@ -623,24 +762,121 @@ PokedexMenu::PokedexMenu(float width, float height, sf::Font font) : Menu(width,
 	sf::Text PokemonNameSFText(CurrentEntry->m_Name, m_Font);
 	menu[0] = PokemonNameSFText;
 	menu[0].setFillColor(sf::Color::Red);
-	menu[0].setPosition(sf::Vector2f(0, height / (3 + 1) * 1));
+	menu[0].setPosition(sf::Vector2f(0, 50.f));
 
 	sf::Text PokemonDescriptionSFText(CurrentEntry->m_Description, m_Font);
 	menu[1] = PokemonDescriptionSFText;
 	menu[1].setFillColor(sf::Color::White);
 	menu[1].setCharacterSize(12);
-	menu[1].setPosition(sf::Vector2f(0, height / (3 + 1) * 2));
+	menu[1].setPosition(sf::Vector2f(0, m_Height - 50.f));
 
 	menu[2].setFont(m_Font);
 	menu[2].setFillColor(sf::Color::White);
 	menu[2].setString("Press A and D to move to different pokemon");
-	menu[2].setPosition(sf::Vector2f(0, height / (3 + 1) * 3));
+	menu[2].setPosition(sf::Vector2f(0, m_Height - 100.f));
+
+	menu[3].setString("ID: ");
+	menu[3].setCharacterSize(30); // default
+	menu[3].setFont(m_Font);
+	menu[3].setFillColor(sf::Color::White);
+	menu[3].setPosition(sf::Vector2f(m_Width - 100, 50.f));
+
+	sf::Text PokemonIDText(std::to_string(CurrentEntry->m_ID), m_Font);
+	menu[4] = PokemonIDText;
+	menu[4].setFillColor(sf::Color::White);
+	menu[4].setCharacterSize(30);
+	menu[4].setPosition(sf::Vector2f(menu[3].getPosition().x + 50, menu[3].getPosition().y));
+
+
+
+
+	const int LabelPaddingX = 75;
+	const int LabelPaddingY = 0;
+
+	const int VariablePaddingX = 10;
+	const int VariablePaddingY = 30;
+
+	const unsigned int LabelCharacterSize = 20;
+	const unsigned int VariableCharacterSize = 15;
+
+	menu[5].setString("HP");
+	menu[5].setCharacterSize(LabelCharacterSize); // default
+	menu[5].setFont(m_Font);
+	menu[5].setFillColor(sf::Color::White);
+	menu[5].setPosition(sf::Vector2f(0.f, 300.f));
+
+	sf::Text PokemonHPText(std::to_string(CurrentEntry->m_Stamina), m_Font);
+	menu[6] = PokemonHPText;
+	menu[6].setFillColor(sf::Color::White);
+	menu[6].setCharacterSize(VariableCharacterSize);
+	menu[6].setPosition(sf::Vector2f(menu[5].getPosition().x + VariablePaddingX, menu[5].getPosition().y + VariablePaddingY));
+
+
+	menu[7].setString("Attack");
+	menu[7].setCharacterSize(LabelCharacterSize); // default
+	menu[7].setFont(m_Font);
+	menu[7].setFillColor(sf::Color::White);
+	menu[7].setPosition(sf::Vector2f(menu[5].getPosition().x + LabelPaddingX, menu[5].getPosition().y));
+
+
+	sf::Text PokemonAttackText(std::to_string(CurrentEntry->m_Attack), m_Font);
+	menu[8] = PokemonAttackText;
+	menu[8].setFillColor(sf::Color::White);
+	menu[8].setCharacterSize(VariableCharacterSize);
+	menu[8].setPosition(sf::Vector2f(menu[7].getPosition().x + VariablePaddingX, menu[7].getPosition().y + VariablePaddingY));
+
+
+	menu[9].setString("Defense");
+	menu[9].setCharacterSize(LabelCharacterSize); // default
+	menu[9].setFont(m_Font);
+	menu[9].setFillColor(sf::Color::White);
+	menu[9].setPosition(sf::Vector2f(menu[7].getPosition().x + LabelPaddingX, menu[7].getPosition().y));
+
+
+	sf::Text PokemonDefenseText(std::to_string(CurrentEntry->m_Defense), m_Font);
+	menu[10] = PokemonDefenseText;
+	menu[10].setFillColor(sf::Color::White);
+	menu[10].setCharacterSize(VariableCharacterSize);
+	menu[10].setPosition(sf::Vector2f(menu[9].getPosition().x + VariablePaddingX, menu[9].getPosition().y + VariablePaddingY));
+
+
+
+
+	// Print Types
+	const int PokemonTypeTextPadding = 75;
+
+	menu[11].setString("Type: ");
+	menu[11].setCharacterSize(20); // default
+	menu[11].setFont(m_Font);
+	menu[11].setFillColor(sf::Color::White);
+	menu[11].setPosition(sf::Vector2f(m_Width / 2, m_Height / 2));
+
+
+	sf::Text PokemonFirstTypeText(GetPokemonTypeName(CurrentEntry->m_FirstType), m_Font);
+	menu[12] = PokemonFirstTypeText;
+	menu[12].setFillColor(sf::Color::White);
+	menu[12].setCharacterSize(20);
+	menu[12].setPosition(sf::Vector2f(menu[11].getPosition().x + PokemonTypeTextPadding, menu[11].getPosition().y));
+
+	sf::Text PokemonSecondTypeText(GetPokemonTypeName(CurrentEntry->m_SecondType), m_Font);
+	menu[13] = PokemonSecondTypeText;
+	menu[13].setFillColor(sf::Color::White);
+	menu[13].setCharacterSize(20);
+	menu[13].setPosition(sf::Vector2f(menu[12].getPosition().x + PokemonTypeTextPadding, menu[12].getPosition().y));
+
+	if (CurrentEntry->m_SecondType == PokemonType::NONE)
+	{
+		menu[13].setString("");
+	}
+
+
+
 
 
 	if (CurrentEntry->m_PictureTexture != nullptr)
 	{
 		m_PokemonPicture = new sf::Sprite(*CurrentEntry->m_PictureTexture);
-		m_PokemonPicture->setPosition(sf::Vector2f(m_Width / 2, 0));
+		m_PokemonPicture->setPosition(sf::Vector2f((m_Width / 2) - 200.f, 0));
 	}
 	else
 	{
@@ -658,7 +894,7 @@ void PokedexMenu::drawTo(sf::RenderWindow& window)
 	//	window.draw(menu[i]);
 	//}
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < MAX_NUMBER_OF_POKEDEX_ITEMS; i++)
 	{
 		window.draw(menu[i]);
 	}
@@ -669,6 +905,7 @@ void PokedexMenu::drawTo(sf::RenderWindow& window)
 	}
 }
 
+// These are unused atm
 void PokedexMenu::MovePrevious()
 {
 	if (GetPressedItem() - 1 >= 0)
@@ -681,7 +918,7 @@ void PokedexMenu::MovePrevious()
 
 void PokedexMenu::MoveNext()
 {
-	if (GetPressedItem() + 1 < MAX_NUMBER_OF_POKEDEX_ITEMS)
+	if (GetPressedItem() + 1 < 11)
 	{
 		menu[GetPressedItem()].setFillColor(sf::Color::White);
 		ModifySelectedItemIndex()++;
@@ -927,3 +1164,111 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+
+
+// TODO: Filter this out into its own class
+
+//#define MAX_NUMBER_OF_LIST_VIEW_ITEMS 10
+//
+//class PokedexListView
+//{
+//private:
+//	// define a 120x50 rectangle
+//	sf::RectangleShape m_BackgroundRect; // (sf::Vector2f(120, 50));
+//	sf::Text m_DisplayTexts[10];
+//	sf::Font m_Font;
+//
+//	std::vector<PokedexEntry>* m_PokemonListData{ nullptr };
+//
+//
+//public:
+//
+//	PokedexListView() = default;
+//
+//	PokedexListView(int Width, int Height, sf::Font DisplayFont);
+//
+//};
+//
+//PokedexListView::PokedexListView(int Width, int Height, sf::Font DisplayFont)
+//{
+//	m_PokemonListData = &m_PokedexData;
+//	m_Font = DisplayFont;
+//
+//	m_BackgroundRect.setSize(sf::Vector2f(50, 120));
+//
+//	//m_DisplayTexts[0].setPosition(m_BackgroundRect.getPosition().x, m_BackgroundRect.getPosition().y);
+//
+//	sf::Text FirstEntrySFText(m_PokemonListData->at(0).m_Name, m_Font);
+//	m_DisplayTexts[0] = FirstEntrySFText;
+//	m_DisplayTexts[0].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[0].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 1));
+//	m_DisplayTexts[0].setCharacterSize(10);
+//
+//	sf::Text SecondEntrySFText(m_PokemonListData->at(1).m_Name, m_Font);
+//	m_DisplayTexts[1] = FirstEntrySFText;
+//	m_DisplayTexts[1].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[1].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 2));
+//	m_DisplayTexts[1].setCharacterSize(10);
+//
+//	sf::Text ThirdEntrySFText(m_PokemonListData->at(2).m_Name, m_Font);
+//	m_DisplayTexts[2] = FirstEntrySFText;
+//	m_DisplayTexts[2].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[2].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 3));
+//	m_DisplayTexts[2].setCharacterSize(10);
+//
+//	sf::Text FourthEntrySFText(m_PokemonListData->at(3).m_Name, m_Font);
+//	m_DisplayTexts[3] = FirstEntrySFText;
+//	m_DisplayTexts[3].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[3].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 4));
+//	m_DisplayTexts[3].setCharacterSize(10);
+//
+//	sf::Text FifthEntrySFText(m_PokemonListData->at(4).m_Name, m_Font);
+//	m_DisplayTexts[4] = FirstEntrySFText;
+//	m_DisplayTexts[4].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[4].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 5));
+//	m_DisplayTexts[4].setCharacterSize(10);
+//
+//	sf::Text SixthEntrySFText(m_PokemonListData->at(5).m_Name, m_Font);
+//	m_DisplayTexts[5] = FirstEntrySFText;
+//	m_DisplayTexts[5].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[5].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 6));
+//	m_DisplayTexts[5].setCharacterSize(10);
+//
+//	sf::Text SeventhEntrySFText(m_PokemonListData->at(6).m_Name, m_Font);
+//	m_DisplayTexts[6] = FirstEntrySFText;
+//	m_DisplayTexts[6].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[6].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 7));
+//	m_DisplayTexts[6].setCharacterSize(10);
+//
+//	sf::Text EigthEntrySFText(m_PokemonListData->at(7).m_Name, m_Font);
+//	m_DisplayTexts[7] = FirstEntrySFText;
+//	m_DisplayTexts[7].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[7].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 8));
+//	m_DisplayTexts[7].setCharacterSize(10);
+//
+//	sf::Text NinthEntrySFText(m_PokemonListData->at(8).m_Name, m_Font);
+//	m_DisplayTexts[8] = FirstEntrySFText;
+//	m_DisplayTexts[8].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[8].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 9));
+//	m_DisplayTexts[8].setCharacterSize(10);
+//
+//	sf::Text TenthEntrySFText(m_PokemonListData->at(9).m_Name, m_Font);
+//	m_DisplayTexts[9] = FirstEntrySFText;
+//	m_DisplayTexts[9].setFillColor(sf::Color::Red);
+//	m_DisplayTexts[9].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, Height / (MAX_NUMBER_OF_LIST_VIEW_ITEMS + 1) * 10));
+//	m_DisplayTexts[9].setCharacterSize(10);
+//
+//
+//	//for (int i = 0; i < 20; ++i)
+//	//{
+//	//	m_DisplayTexts->setCharacterSize(10);
+//	//}
+//
+//
+//	//sf::Text PokemonNameSFText(CurrentEntry->m_Name, m_Font);
+//	//menu[0] = PokemonNameSFText;
+//	//menu[0].setFillColor(sf::Color::Red);
+//	//menu[0].setPosition(sf::Vector2f(0, height / (3 + 1) * 1));
+//
+//	//m_DisplayTexts[0]
+//}
