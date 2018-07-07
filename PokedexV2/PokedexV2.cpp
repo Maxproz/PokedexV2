@@ -365,6 +365,7 @@ void display(const CSVDatabase& db)
 enum class GAMESTATE
 {
 	MAINMENU,
+	FILTERMENU,
 	POKEDEXMENU
 };
 
@@ -1011,6 +1012,132 @@ void PokedexMenu::MoveNext()
 
 
 
+
+
+
+// Testing filter menu
+
+#define MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES 5
+
+class PokedexFilterMenu : public Menu
+{
+
+public:
+	PokedexFilterMenu(float width, float height, sf::Font font);
+	~PokedexFilterMenu() {}
+
+	virtual void drawTo(sf::RenderWindow& window) override;
+	virtual void MoveNext() override;
+	virtual void MovePrevious() override;
+
+private:
+	sf::Font m_Font;
+	sf::Text m_menu[MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES];
+	int selectedItemIndex{ 0 };
+	sf::RectangleShape m_BackgroundRect;
+	std::vector<PokedexEntry>* m_PokemonListData{ nullptr };
+};
+
+PokedexFilterMenu::PokedexFilterMenu(float width, float height, sf::Font font) : Menu(width, height)
+{
+	m_Font = font;
+	m_BackgroundRect.setSize(sf::Vector2f(100, 250));
+	m_BackgroundRect.setPosition(sf::Vector2f(100, 250));
+	m_BackgroundRect.setFillColor(sf::Color::Transparent);
+	m_BackgroundRect.setOutlineColor(sf::Color::Black);
+	m_BackgroundRect.setOutlineThickness(1);
+	m_PokemonListData = &m_PokedexData;
+
+	const unsigned int TextCharSize = 15;
+
+	sf::Text FirstEntrySFText(m_PokemonListData->at(1).m_Name, m_Font);
+	m_menu[0] = FirstEntrySFText;
+	m_menu[0].setFillColor(sf::Color::Red);
+	m_menu[0].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, m_BackgroundRect.getPosition().y));// height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 1));
+	m_menu[0].setCharacterSize(TextCharSize);
+
+	sf::Text SecondEntrySFText(m_PokemonListData->at(2).m_Name, m_Font);
+	m_menu[1] = SecondEntrySFText;
+	m_menu[1].setFillColor(sf::Color::Red);
+	m_menu[1].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, m_BackgroundRect.getPosition().y + 15)); // height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 2));
+	m_menu[1].setCharacterSize(TextCharSize);
+
+	sf::Text ThirdEntrySFText(m_PokemonListData->at(3).m_Name, m_Font);
+	m_menu[2] = ThirdEntrySFText;
+	m_menu[2].setFillColor(sf::Color::Red);
+	m_menu[2].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, m_BackgroundRect.getPosition().y + 30)); // height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 3));
+	m_menu[2].setCharacterSize(TextCharSize);
+
+	sf::Text FourthEntrySFText(m_PokemonListData->at(4).m_Name, m_Font);
+	m_menu[3] = FourthEntrySFText;
+	m_menu[3].setFillColor(sf::Color::Red);
+	m_menu[3].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, m_BackgroundRect.getPosition().y + 45)); // height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 4));
+	m_menu[3].setCharacterSize(TextCharSize);
+
+	sf::Text FifthEntrySFText(m_PokemonListData->at(5).m_Name, m_Font);
+	m_menu[4] = FifthEntrySFText;
+	m_menu[4].setFillColor(sf::Color::Red);
+	m_menu[4].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, m_BackgroundRect.getPosition().y + 60)); // height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 5));
+	m_menu[4].setCharacterSize(TextCharSize);
+
+
+}
+
+// TODO: Create a highlight I will start by highlighting the first name
+// - When I get to the bottom of the list and keep going then all the index names will update by one to show I am scrolling down in the list.
+
+// TODO: Once list scroll is working, increase the size of it to 10
+
+// TODO: Once size of the list is 10 and updating correctly, Make it so hitting enter on that name will open the pokedex menu for that pokemon.
+
+// TODO: Add functionality for the pokedex individual entry menus so that when you hit backspace it will open the PokedexFilterMenu again.
+
+// TODO: Add a couple more images to the Pokemon CSV sheet, (250,250, transparent)
+
+// TODO: Tidy up the individual pokedex menu so its a more presentable
+
+void PokedexFilterMenu::drawTo(sf::RenderWindow& window)
+{
+	for (int i = 0; i < MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES; i++)
+	{
+		window.draw(m_menu[i]);
+	}
+
+	window.draw(m_BackgroundRect);
+
+
+}
+
+void PokedexFilterMenu::MovePrevious()
+{
+	if (GetPressedItem() - 1 >= 0)
+	{
+		m_menu[GetPressedItem()].setFillColor(sf::Color::White);
+		ModifySelectedItemIndex()--;
+		m_menu[GetPressedItem()].setFillColor(sf::Color::Red);
+	}
+}
+
+void PokedexFilterMenu::MoveNext()
+{
+	if (GetPressedItem() + 1 < MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES)
+	{
+		m_menu[GetPressedItem()].setFillColor(sf::Color::White);
+		ModifySelectedItemIndex()++;
+		m_menu[GetPressedItem()].setFillColor(sf::Color::Red);
+	}
+	else
+	{
+		m_menu[GetPressedItem()].setFillColor(sf::Color::White);
+		ModifySelectedItemIndex() = 0;
+		m_menu[GetPressedItem()].setFillColor(sf::Color::Red);
+	}
+}
+
+
+
+
+
 int main(int argc, char* argv[])
 {
 	//sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
@@ -1132,12 +1259,21 @@ int main(int argc, char* argv[])
 									{
 										std::cout << "Play button has been pressed" << std::endl;
 										
+
+										// TODO: Temp comment out for testing
+
+										//delete CurrentMenu;
+										//CurrentMenu = new PokedexMenu(width, height, DebugFont);
+										////CurrentPokedexMenu = new PokedexMenu(width, height, DebugFont);
+										//CurrentGameState = GAMESTATE::POKEDEXMENU;
+										//
+										//GameStateDebugText.setString("Current GameState: " + GetGameStateAsString(CurrentGameState));
+
 										delete CurrentMenu;
-										CurrentMenu = new PokedexMenu(width, height, DebugFont);
-										//CurrentPokedexMenu = new PokedexMenu(width, height, DebugFont);
-										CurrentGameState = GAMESTATE::POKEDEXMENU;
-										
+										CurrentMenu = new PokedexFilterMenu(width, height, DebugFont);
+										CurrentGameState = GAMESTATE::FILTERMENU;
 										GameStateDebugText.setString("Current GameState: " + GetGameStateAsString(CurrentGameState));
+
 
 										//delete CurrentMainMenu;
 										//CurrentMainMenu = nullptr;
@@ -1244,105 +1380,7 @@ int main(int argc, char* argv[])
 
 
 
-#define MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES 3
 
-class PokedexFilterMenu : public Menu
-{
-
-public:
-	PokedexFilterMenu(float width, float height, sf::Font font);
-	~PokedexFilterMenu() {}
-
-	virtual void drawTo(sf::RenderWindow& window) override;
-	virtual void MoveNext() override;
-	virtual void MovePrevious() override;
-
-private:
-	sf::Font m_Font;
-	sf::Text m_menu[MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES];
-	int selectedItemIndex{ 0 };
-	sf::RectangleShape m_BackgroundRect;
-	std::vector<PokedexEntry>* m_PokemonListData{ nullptr };
-};
-
-PokedexFilterMenu::PokedexFilterMenu(float width, float height, sf::Font font) : Menu(width, height)
-{
-	m_Font = font;
-	m_BackgroundRect.setSize(sf::Vector2f(50, 120));
-	m_PokemonListData = &m_PokedexData;
-
-	
-	sf::Text FirstEntrySFText(m_PokemonListData->at(0).m_Name, m_Font);
-	m_menu[0] = FirstEntrySFText;
-	m_menu[0].setFillColor(sf::Color::Red);
-	m_menu[0].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 1));
-	m_menu[0].setCharacterSize(10);
-	
-	sf::Text SecondEntrySFText(m_PokemonListData->at(1).m_Name, m_Font);
-	m_menu[1] = FirstEntrySFText;
-	m_menu[1].setFillColor(sf::Color::Red);
-	m_menu[1].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 2));
-	m_menu[1].setCharacterSize(10);
-	
-	sf::Text ThirdEntrySFText(m_PokemonListData->at(2).m_Name, m_Font);
-	m_menu[2] = FirstEntrySFText;
-	m_menu[2].setFillColor(sf::Color::Red);
-	m_menu[2].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 3));
-	m_menu[2].setCharacterSize(10);
-	
-	sf::Text FourthEntrySFText(m_PokemonListData->at(3).m_Name, m_Font);
-	m_menu[3] = FirstEntrySFText;
-	m_menu[3].setFillColor(sf::Color::Red);
-	m_menu[3].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 4));
-	m_menu[3].setCharacterSize(10);
-	
-	sf::Text FifthEntrySFText(m_PokemonListData->at(4).m_Name, m_Font);
-	m_menu[4] = FirstEntrySFText;
-	m_menu[4].setFillColor(sf::Color::Red);
-	m_menu[4].setPosition(sf::Vector2f(m_BackgroundRect.getPosition().x, height / (MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES + 1) * 5));
-	m_menu[4].setCharacterSize(10);
-
-
-}
-
-
-void PokedexFilterMenu::drawTo(sf::RenderWindow& window)
-{
-	for (int i = 0; i < MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES; i++)
-	{
-		window.draw(m_menu[i]);
-	}
-
-	window.draw(m_BackgroundRect);
-
-
-}
-
-void PokedexFilterMenu::MovePrevious()
-{
-	if (GetPressedItem() - 1 >= 0)
-	{
-		m_menu[GetPressedItem()].setFillColor(sf::Color::White);
-		ModifySelectedItemIndex()--;
-		m_menu[GetPressedItem()].setFillColor(sf::Color::Red);
-	}
-}
-
-void PokedexFilterMenu::MoveNext()
-{
-	if (GetPressedItem() + 1 < MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES)
-	{
-		m_menu[GetPressedItem()].setFillColor(sf::Color::White);
-		ModifySelectedItemIndex()++;
-		m_menu[GetPressedItem()].setFillColor(sf::Color::Red);
-	}
-	else
-	{
-		m_menu[GetPressedItem()].setFillColor(sf::Color::White);
-		ModifySelectedItemIndex() = 0;
-		m_menu[GetPressedItem()].setFillColor(sf::Color::Red);
-	}
-}
 
 
 
