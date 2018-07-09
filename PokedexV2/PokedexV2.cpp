@@ -1045,6 +1045,25 @@ public:
 		return m_PokemonListData->at(TextIndexes[SelectedID]).m_ID - 1;
 	}
 
+
+	// After researching, I found out that I could under trial and error hard code this to work.
+	// But if I started over and made my texts "Buttons" instead with a floatrect below the text it would take a lot less time.
+
+	//bool TextBoxContainsMouseCursor(sf::Mouse* mouse, sf::Text& OutContains)
+	//{
+	//	for (int i = 0; i < MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES; ++i)
+	//	{
+	//		auto pos = mouse->getPosition();
+	//		sf::Fl
+	//		if (m_menu[i].getGlobalBounds().contains(mouse->getPosition()))
+	//		{
+	//			return true;
+	//		}
+
+	//		return false;
+	//	}
+	//}
+
 private:
 	sf::Font m_Font;
 	sf::Text m_menu[MAX_NUMBER_OF_POKEDEX_FILTER_ENTRIES];
@@ -1259,14 +1278,14 @@ int main(int argc, char* argv[])
 
 
 	// Display the list of all the video modes available for fullscreen
-	std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
-	for (std::size_t i = 0; i < modes.size(); ++i)
-	{
-		sf::VideoMode mode = modes[i];
-		std::cout << "Mode #" << i << ": "
-			<< mode.width << "x" << mode.height << " - "
-			<< mode.bitsPerPixel << " bpp" << std::endl;
-	}
+	//std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+	//for (std::size_t i = 0; i < modes.size(); ++i)
+	//{
+	//	sf::VideoMode mode = modes[i];
+	//	std::cout << "Mode #" << i << ": "
+	//		<< mode.width << "x" << mode.height << " - "
+	//		<< mode.bitsPerPixel << " bpp" << std::endl;
+	//}
 	//// Create a window with the same pixel depth as the desktop
 	//sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	//window.create(sf::VideoMode(1024, 768, desktop.bitsPerPixel), "SFML window");
@@ -1398,7 +1417,7 @@ int main(int argc, char* argv[])
 									case 0:
 									{
 										std::cout << "Play button has been pressed" << std::endl;
-										
+
 
 										// TODO: Temp comment out for testing
 
@@ -1440,7 +1459,7 @@ int main(int argc, char* argv[])
 								//switch (CurrentMainMenu->GetPressedItem())
 								switch (CurrentMenu->GetPressedItem())
 								{
-								
+
 									case 0:
 									{
 										auto ChosenID = CurrentMenu->GetPresssedItemPokemonID(0);
@@ -1457,7 +1476,7 @@ int main(int argc, char* argv[])
 									{
 
 										auto ChosenID = CurrentMenu->GetPresssedItemPokemonID(1);
-										
+
 										std::cout << "Second Item In Filter Menu Selected Entering Menu" << std::endl;
 										delete CurrentMenu;
 										CurrentMenu = new PokedexMenu(width, height, DebugFont, ChosenID);
@@ -1469,7 +1488,7 @@ int main(int argc, char* argv[])
 									case 2:
 									{
 										auto ChosenID = CurrentMenu->GetPresssedItemPokemonID(2);
-										
+
 										std::cout << "Third Item In Filter Menu Selected Entering Menu" << std::endl;
 										delete CurrentMenu;
 										CurrentMenu = new PokedexMenu(width, height, DebugFont, ChosenID);
@@ -1560,7 +1579,33 @@ int main(int argc, char* argv[])
 						}
 					}
 					break; // break out of the key released switch 
-				}
+				} // Took this out for now
+				//case sf::Event::MouseButtonPressed:
+				//{
+				//	switch (Event.mouseButton.button)
+				//	{
+				//		case sf::Mouse::Left:
+				//		{
+				//			sf::Vector2i position = sf::Mouse::getPosition();
+
+				//			if (CurrentGameState == GAMESTATE::POKEDEXMENU)
+				//			{
+				//				break;
+				//			}
+				//			else if (CurrentGameState == GAMESTATE::MAINMENU)
+				//			{
+				//				break;
+				//			}
+				//			else if (CurrentGameState == GAMESTATE::FILTERMENU)
+				//			{
+
+
+
+				//				break;
+				//			}
+				//		}
+				//	}
+				//}
 				case sf::Event::Closed:
 				{
 					window.close();
